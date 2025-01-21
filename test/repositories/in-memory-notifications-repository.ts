@@ -2,7 +2,11 @@ import type { NotificationsRepository } from 'src/app/repositories/notifications
 import type { Notification } from '../../src/app/entities/notification';
 export class InNotificationsRepository implements NotificationsRepository {
   public notifications: Notification[] = [];
-
+  async findManyByRecipientId(recipientId: string): Promise<Notification[]> {
+    return this.notifications.filter(
+      (notification) => notification.recipientId === recipientId,
+    );
+  }
   async findById(notificationId: string): Promise<Notification | null> {
     const notification = this.notifications.find(
       (item) => item.id === notificationId,
