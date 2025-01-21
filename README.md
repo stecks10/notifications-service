@@ -1,3 +1,7 @@
+Aqui está a versão atualizada do seu `README.md` com a adição do Swagger:
+
+---
+
 # Notifications Service
 
 ## Descrição
@@ -19,6 +23,7 @@ Este é um projeto desenvolvido para gerenciar notificações utilizando o frame
 - **Prisma**: ORM para interação com o banco de dados
 - **TypeScript**: Linguagem principal do projeto
 - **Jest**: Testes automatizados
+- **Swagger**: Documentação interativa da API
 
 ## Instalação
 
@@ -63,6 +68,20 @@ Este é um projeto desenvolvido para gerenciar notificações utilizando o frame
 - **src/infra**: Infraestrutura do projeto, incluindo o Prisma e repositórios.
 - **src/http**: Rotas, controllers e validações HTTP.
 - **test**: Testes automatizados para os casos de uso e demais componentes.
+
+## Documentação da API com Swagger
+
+A documentação interativa da API está disponível em:
+
+```
+http://localhost:3000/api/docs
+```
+
+### Como usar o Swagger:
+
+1. Acesse `http://localhost:3000/api/docs` no navegador.
+2. Expanda os endpoints para visualizar os detalhes.
+3. Use a opção **Try it out** para testar os endpoints diretamente na interface.
 
 ## Rotas Disponíveis
 
