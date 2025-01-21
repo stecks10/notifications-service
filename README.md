@@ -1,99 +1,130 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Notifications Service
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## Descrição
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+Este é um projeto desenvolvido para gerenciar notificações utilizando o framework NestJS integrado ao Prisma como ORM. O objetivo é implementar um serviço backend robusto, utilizando princípios do SOLID, casos de uso bem definidos e testes automatizados.
 
-## Description
+## Funcionalidades
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- Criação de notificações
+- Leitura de notificações
+- Cancelamento de notificações
+- Marcar notificações como não lidas
+- Contagem de notificações por destinatário
+- Consulta de notificações por destinatário
 
-## Project setup
+## Tecnologias Utilizadas
 
-```bash
-$ npm install
-```
+- **NestJS**: Framework para aplicações Node.js
+- **Prisma**: ORM para interação com o banco de dados
+- **TypeScript**: Linguagem principal do projeto
+- **Jest**: Testes automatizados
 
-## Compile and run the project
+## Instalação
 
-```bash
-# development
-$ npm run start
+1. Clone o repositório:
+   ```bash
+   git clone no repositório
+   cd notifications-service
+   ```
+2. Instale as dependências:
+   ```bash
+   npm install
+   ```
+3. Configure o banco de dados Prisma:
+   - Certifique-se de que o arquivo `.env` está configurado corretamente.
+   - Rode o comando:
+     ```bash
+     npx prisma migrate dev
+     ```
 
-# watch mode
-$ npm run start:dev
+## Scripts Disponíveis
 
-# production mode
-$ npm run start:prod
-```
+- **Iniciar o projeto**:
+  ```bash
+  npm start
+  ```
+- **Iniciar o projeto em modo de desenvolvimento**:
+  ```bash
+  npm run start:dev
+  ```
+- **Executar testes**:
+  ```bash
+  npm test
+  ```
+- **Construir o projeto**:
+  ```bash
+  npm run build
+  ```
 
-## Run tests
+## Estrutura do Projeto
 
-```bash
-# unit tests
-$ npm run test
+- **src/app**: Contém as entidades, casos de uso e regras de negócio.
+- **src/infra**: Infraestrutura do projeto, incluindo o Prisma e repositórios.
+- **src/http**: Rotas, controllers e validações HTTP.
+- **test**: Testes automatizados para os casos de uso e demais componentes.
 
-# e2e tests
-$ npm run test:e2e
+## Rotas Disponíveis
 
-# test coverage
-$ npm run test:cov
-```
+### POST `/notifications`
 
-## Deployment
+Cria uma nova notificação.
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+- **Corpo da requisição:**
+  ```json
+  {
+    "recipientId": "string",
+    "content": "string",
+    "category": "string"
+  }
+  ```
+- **Exemplo de resposta:**
+  ```json
+  {
+    "id": "string",
+    "recipientId": "string",
+    "content": "string",
+    "category": "string",
+    "createdAt": "string"
+  }
+  ```
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+### PATCH `/notifications/:id/cancel`
 
-```bash
-$ npm install -g mau
-$ mau deploy
-```
+Cancela uma notificação.
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+### PATCH `/notifications/:id/read`
 
-## Resources
+Marca uma notificação como lida.
 
-Check out a few resources that may come in handy when working with NestJS:
+### PATCH `/notifications/:id/unread`
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+Marca uma notificação como não lida.
 
-## Support
+### GET `/notifications/count/from/:recipientId`
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+Obtém a contagem de notificações de um destinatário.
 
-## Stay in touch
+### GET `/notifications/from/:recipientId`
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+Obtém as notificações de um destinatário.
 
-## License
+## Contribuição
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+1. Crie uma branch para suas alterações:
+   ```bash
+   git checkout -b minha-feature
+   ```
+2. Faça commit das suas alterações:
+   ```bash
+   git commit -m "Minha nova funcionalidade"
+   ```
+3. Envie as alterações:
+   ```bash
+   git push origin minha-feature
+   ```
+4. Abra um Pull Request no GitHub.
+
+## Licença
+
+Este projeto está sob a licença **UNLICENSED.**
